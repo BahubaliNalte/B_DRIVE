@@ -53,7 +53,7 @@ router.post('/login',
         if (!errors.isEmpty()) {    
             return res.status(400)
         .json({
-            error: error.array(),
+            error: errors.array(),
             message: 'INVALID DATA'
         })
         }
@@ -64,19 +64,19 @@ router.post('/login',
             username: username
         })
 
-        if(!user){
-            return res.status(400).json({
-                message: 'username or password is incorrect'
-            })
-        }
+        // if(!user){
+        //     return res.status(400).json({
+        //         message: 'username or password is incorrect'
+        //     })
+        // }
 
         const isMatch = await bcrypt.compare(password, user.password) 
 
-        if(!isMatch){
-            return res.status(400).json({
-                message: 'username or password is incorrect'
-            })
-        }
+        // if(!isMatch){
+        //     return res.status(400).json({
+        //         message: 'username or password is incorrect'
+        //     })
+        // }
 
         const token = jwt.sign({
             userId: user._id,
